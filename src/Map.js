@@ -1,9 +1,20 @@
-import React from 'react'
+import React from 'react';
+import './Map.css'
+import { Map as LeaftletMap, TileLayer } from "react-leaflet"
+import { showDataOnMap } from './util'
 
-function Map() {
+function Map( {countries, casesType, center, zoom} ) {
     return (
         <div className="map">
-            <h1>I am a MAP</h1>
+           <LeaftletMap center={center} zoom={zoom}>
+               <TileLayer
+                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                   attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                   />
+
+                   {/* Loop through countries and draw circles on the screen */}
+                   {showDataOnMap(countries, casesType)}
+           </LeaftletMap>
         </div>
     )
 }
